@@ -11,8 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// builder.Services.AddEndpointsApiExplorer();
+// builder.Services.AddSwaggerGen();
 
 builder.Services.AddRazorPages();
 builder.Services.AddCors(options =>
@@ -35,11 +35,11 @@ builder.Services.AddSignalR(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// if (app.Environment.IsDevelopment())
+// {
+//     app.UseSwagger();
+//     app.UseSwaggerUI();
+// }
 
 app.UseCors(policyBuilder =>
 {
@@ -59,5 +59,5 @@ app.MapControllers();
 
 app.MapHub<MessageHub>("/messages", options => { });
 
-
+app.Run(async (context) => await Task.Run(() => context.Response.Redirect("/index.html")));
 app.Run();
